@@ -23,8 +23,11 @@ class ProfileService{
         
         let (data, response) = try await URLSession.shared.data(from: url)
         
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw Errors.invalidResponse
+        if let httpResponse = response as? HTTPURLResponse{
+            if httpResponse.statusCode != 200 {
+                print("error \(httpResponse.statusCode)")
+                throw Errors.invalidResponse
+            }
         }
         
         do {
@@ -33,6 +36,7 @@ class ProfileService{
             
             return try decoder.decode(Profile.self, from: data)
         } catch {
+            print("error - invalid data")
             throw Errors.invalidData
         }
     }

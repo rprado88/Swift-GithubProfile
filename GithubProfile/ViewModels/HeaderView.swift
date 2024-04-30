@@ -10,12 +10,18 @@ import SwiftUI
 struct HeaderView: View {
     var body: some View {
         ZStack{
-            RoundedRectangle(cornerRadius: 0)
             
-            Image("GitLogo")
         }
-        .frame(width: UIScreen.main.bounds.width * 3, height: 300)
-        .offset(y: -150)
+        .overlay(Image(("gitlogo")).resizable().frame(width: 120, height: 120))
+        .edgesIgnoringSafeArea(.top)
+        .frame(width: UIScreen.main.bounds.width * 2, height: 200)
+        .offset(y: 10)
+        
+        VStack{
+            Text("GitHub Profile")
+            .font(.system(size: 30))
+            .bold()
+        }
     }
 }
 

@@ -17,9 +17,10 @@ class ProfileViewViewModel: ObservableObject {
     {
         do
         {
+            print("GetProfile - \(userName)")
             profile = try await ProfileService().getUserProfile(userName: userName)
         } catch {
-        
+            return profile ?? Profile(login: "", name: "", avatarUrl: "", bio: "")
         }
         
         return profile!

@@ -11,7 +11,14 @@ struct SearchView: View {
     
     @StateObject var viewModel = SearchViewViewModel()
     
+    var profileViewModel = ProfileViewViewModel()
+    
+    @State private var isTaskCompleted = false
+    
+    @State var model: Profile?
+    
     var body: some View {
+        NavigationStack {
             VStack {
                 
                 HeaderView()
@@ -23,23 +30,38 @@ struct SearchView: View {
                     
                     Spacer()
                     
-                    Button {
-                        // Action
-                        print("search by \(viewModel.userName)")
+                    Button("Search"){
                         
-                        
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(.blue)
+                        Task{
+                            do {
+                                model = try await profileViewModel.getProfile(userName: viewModel.userName)
+                                
+                                print(model)
+                                
+                            } catch Errors.invalidURL {
+                                print("Invalid URL")
+                            }
+                            catch Errors.invalidResponse {
+                                print("Invalid response")
+                            }
+                            catch Errors.invalidData {
+                                print("Invalid data")
+                            }
+                            catch {
+                                print("Unexepected error")
+                            }
                             
-                            Text("Search")
-                                .foregroundColor(Color.white)
-                                .bold()
+                            isTaskCompleted = true
                         }
-                    }.padding()
+                    }
+                    .padding()
                 }
+                Spacer()
             }
+            .navigationDestination(isPresented: $isTaskCompleted) {
+                MainView(userProfile: model)
+             }
+        }
     }
 }
 

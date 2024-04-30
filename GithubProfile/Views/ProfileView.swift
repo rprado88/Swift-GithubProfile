@@ -11,10 +11,17 @@ struct ProfileView: View {
     
     var viewModel = ProfileViewViewModel()
     
-    @State private var model: Profile?
+    var name = ""
+    var login = ""
+    var bio = ""
+    var avatar = ""
     
-    init(userName: String){
+    init(userName: String, userLogin: String, userBio: String, userAvatar: String){
         
+        self.name = userName
+        self.login = userLogin
+        self.bio = userBio
+        self.avatar = userAvatar
     }
     
     var body: some View {
@@ -23,7 +30,7 @@ struct ProfileView: View {
             Spacer()
             
             Form{
-                AsyncImage(url: URL(string: model?.avatarUrl ?? "")) { image in
+                AsyncImage(url: URL(string: avatar)) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -34,55 +41,23 @@ struct ProfileView: View {
                 }
                 .frame(width: 120, height: 120)
                 
-                Text(model?.name ?? "Name Placeholder")
+                Text(name)
                     .bold()
                     .font(.title3)
                 
-                Text(model?.login ?? "Login Placeholder")
+                Text(login)
                     .bold()
                     .font(.title3)
                 
-                Text(model?.bio ?? "Bio Placeholder")
+                Text(bio)
                     .padding()
-                
-                Button {
-                    // Action
-                    print("Search View")
-                    SearchView()
-                    
-                } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(.blue)
-                        
-                        Text("New Search")
-                            .foregroundColor(Color.white)
-                            .bold()
-                    }
-                }.padding()
             }
             Spacer()
         }
         .padding()
-        .task {
-            do {
-                model = try await viewModel.getProfile(userName: "rprado88")
-            } catch Errors.invalidURL {
-                print("Invalid URL")
-            }
-            catch Errors.invalidResponse {
-                print("Invalid response")
-            }
-            catch Errors.invalidData {
-                print("Invalid data")
-            }
-            catch {
-                print("Unexepected error")
-            }
-        }
     }
 }
 
 #Preview {
-    ProfileView(userName: "rprado88")
+    ProfileView(userName: "", userLogin: "", userBio: "", userAvatar: "")
 }

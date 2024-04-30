@@ -9,9 +9,9 @@ import Foundation
 
 struct Profile: Codable {
     
-    let login: String
-    let name: String
-    let avatarUrl: String
-    let bio: String
+    let login: String?
+    let name: String?
+    let avatarUrl: String?
+    let bio: String?
     
 }

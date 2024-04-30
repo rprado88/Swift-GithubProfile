@@ -9,28 +9,32 @@ import SwiftUI
 
 struct MainView: View {
     
-    @StateObject var viewModel = MainViewViewModel()
+    var model: Profile!
+    
+    init(userProfile: Profile!) {
+        self.model = userProfile
+        
+        print("MainView - userProfile \(String(describing: self.model))")
+    }
     
     var body: some View {
         VStack {
             
-            if viewModel.userFound, !viewModel.userName.isEmpty{
+            if(model != nil)
+            {
                 accountView
-            } else {
-                SearchView()
             }
-            
         }
     }
     
     @ViewBuilder
     var accountView: some View {
         TabView {
-            ProfileView(userName: viewModel.userName)
+            ProfileView(userName: model.name ?? "No name", userLogin: model.login ?? "No login", userBio: model.bio ?? "No Bio", userAvatar: model.avatarUrl ?? "No Avatar")
                 .tabItem{
                     Label("Profile", systemImage: "person.crop.circle")
                 }
-            FollowersView(userName: viewModel.userName)
+            FollowersView(userName: model.login ?? "")
                 .tabItem{
                     Label("Followers", systemImage: "list.bullet")
                 }
@@ -39,5 +43,5 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView()
+    MainView(userProfile: Profile(login: "", name: "", avatarUrl: "", bio: ""))
 }

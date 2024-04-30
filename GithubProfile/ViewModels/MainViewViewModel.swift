@@ -9,11 +9,10 @@ import Foundation
 
 class MainViewViewModel: ObservableObject{
     
-    @Published var userFound = true
-    @Published var userName = "rprado88"
+    @Published var userName: String
     
-    init(){
-        
+    init(userName: String) {
+        self.userName = userName
     }
     
 }

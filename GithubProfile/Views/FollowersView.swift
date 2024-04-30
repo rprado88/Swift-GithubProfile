@@ -15,8 +15,12 @@ struct FollowersView: View {
     
     var emptyArray = [Follower]()
     
+    var userName = ""
+    
     init(userName: String)
     {
+        self.userName = userName
+        print("FollowersView - userName \(self.userName)")
     }
     
     var body: some View {
@@ -27,7 +31,7 @@ struct FollowersView: View {
         }
         .task {
             do {
-                items = try await viewModel.getFollowersByUserName(userName: "rprado88")
+                items = try await viewModel.getFollowersByUserName(userName: userName)
             } catch Errors.invalidURL {
                 print("Invalid URL")
             }

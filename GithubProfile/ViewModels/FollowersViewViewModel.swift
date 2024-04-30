@@ -19,7 +19,7 @@ class FollowersViewViewModel: ObservableObject {
         {
             followers = try await ProfileService().getFollowers(userName: userName)
         } catch {
-        
+            return []
         }
         
         return followers!

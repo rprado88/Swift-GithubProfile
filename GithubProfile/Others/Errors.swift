@@ -10,6 +10,7 @@ import Foundation
 enum Errors: Error{
     
     case invalidURL
+    case notFound
     case invalidResponse
     case invalidData
 }
