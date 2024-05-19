@@ -54,6 +54,11 @@ struct SearchView: View {
                             isTaskCompleted = true
                         }
                     }
+                    .bold()
+                    .frame(width: 280, height: 50)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
                     .padding()
                 }
                 Spacer()
