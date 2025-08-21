@@ -35,7 +35,3 @@ struct FollowerView: View {
         }
     }
 }
-
-#Preview {
-    FollowerView(follower: .init(login: "rprado88", avatarUrl: "url"))
-}

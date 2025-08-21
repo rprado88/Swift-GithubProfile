@@ -41,7 +41,3 @@ struct MainView: View {
         }
     }
 }
-
-#Preview {
-    MainView(userProfile: Profile(login: "", name: "", avatarUrl: "", bio: ""))
-}

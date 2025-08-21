@@ -12,7 +12,7 @@ struct HeaderView: View {
         ZStack{
             
         }
-        .overlay(Image(("gitlogo")).resizable().frame(width: 120, height: 120))
+        .overlay(Image(("GitLogo")).resizable().frame(width: 120, height: 120))
         .edgesIgnoringSafeArea(.top)
         .frame(width: UIScreen.main.bounds.width * 2, height: 200)
         .offset(y: 10)
@@ -23,8 +23,4 @@ struct HeaderView: View {
             .bold()
         }
     }
-}
-
-#Preview {
-    HeaderView()
 }

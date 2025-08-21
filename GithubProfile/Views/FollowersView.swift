@@ -48,7 +48,3 @@ struct FollowersView: View {
         
     }
 }
-
-#Preview {
-    FollowersView(userName: "rprado88")
-}

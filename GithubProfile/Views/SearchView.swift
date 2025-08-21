@@ -22,19 +22,17 @@ struct SearchView: View {
             VStack {
                 
                 HeaderView()
-                
-                Form{
-                    TextField("User Name", text: $viewModel.userName)
-                        .textFieldStyle(DefaultTextFieldStyle())
-                        .autocorrectionDisabled()
+                Form {
                     
-                    Spacer()
+                    TextField("User Name", text: $viewModel.userName)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .autocorrectionDisabled()
                     
                     Button("Search"){
                         
                         Task{
                             do {
-                                model = try await profileViewModel.getProfile(userName: viewModel.userName)
+                                model = await profileViewModel.getProfile(userName: viewModel.userName)
                                 
                                 print(model)
                                 
@@ -55,12 +53,15 @@ struct SearchView: View {
                         }
                     }
                     .bold()
-                    .frame(width: 280, height: 50)
+                    .frame(width: 180, height: 50)
+                    .frame(maxWidth: .infinity) 
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(10)
-                    .padding()
+                    .padding(.horizontal)
                 }
+                .frame(width: 380)
+                
                 Spacer()
             }
             .navigationDestination(isPresented: $isTaskCompleted) {
@@ -68,8 +69,4 @@ struct SearchView: View {
              }
         }
     }
-}
-
-#Preview {
-    SearchView()
 }

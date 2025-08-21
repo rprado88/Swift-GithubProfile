@@ -57,7 +57,3 @@ struct ProfileView: View {
         .padding()
     }
 }
-
-#Preview {
-    ProfileView(userName: "", userLogin: "", userBio: "", userAvatar: "")
-}
